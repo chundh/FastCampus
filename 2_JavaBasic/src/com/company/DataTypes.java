@@ -1,6 +1,5 @@
 package com.company;
 
-import java.sql.SQLOutput;
 
 /**
  * 자료형(DataTypes)
