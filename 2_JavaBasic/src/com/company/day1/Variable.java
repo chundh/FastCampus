@@ -1,4 +1,4 @@
-package com.company;
+package com.company.day1;
 
 /**
  * 변수의 타입, 변수명, 값 할당, 선언
