@@ -4,7 +4,7 @@ package com.company.day4;
  *
  */
 
-public class Arrays {
+public class Arrays_Class {
     public static void main(String args[]){
         int[] integers;
         integers = new int[10];

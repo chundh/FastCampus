@@ -4,7 +4,7 @@ package com.company.day4;
  *
  */
 
-public class NDArrays {
+public class NDArrays_Class {
     public static void main(String args[]){
         //선언
         int[][] arr = new int[10][5];
