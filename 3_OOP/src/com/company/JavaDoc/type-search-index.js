@@ -1,0 +1,1 @@
+typeSearchIndex = [{"p":"com.company.day2","l":"JavaDoc_Class"}]
