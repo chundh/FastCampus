@@ -52,16 +52,17 @@ public class Rect extends RectCore {
     }
 
     public Vector2D getCenterOfMass() {
-        return new Vector2D(super.pos.x, super.pos.y);
+
+        return new Vector2D(super.pos.x+(w/2), super.pos.y+(h/2));
     }
 
     public Vector2D [] getAllPoints() {
         float x = super.pos.x;
         float y = super.pos.y;
-        Vector2D a = new Vector2D(x-(w/2), y-(h/2));
-        Vector2D b = new Vector2D(x-(w/2), y+(h/2));
-        Vector2D c = new Vector2D(x+(w/2), y-(h/2));
-        Vector2D d = new Vector2D(x+(w/2), y+(h/2));
+        Vector2D a = new Vector2D(x, y);
+        Vector2D b = new Vector2D(x+w, y);
+        Vector2D c = new Vector2D(x, y+h);
+        Vector2D d = new Vector2D(x+w, y+h);
         Vector2D[] arr = new Vector2D[4];
         arr[0] = a;
         arr[1] = b;
@@ -71,37 +72,38 @@ public class Rect extends RectCore {
     }
 
     public void rot90(Vector2D pivot) {
-        float x = super.pos.x;
-        float y = super.pos.y;
+        Vector2D center = this.getCenterOfMass();
+        float x = center.x;
+        float y = center.y;
         x-=pivot.x;
         y-=pivot.y;
-        super.pos.x = -y+pivot.x;
-        super.pos.y = x+pivot.y;
 
         float temp = w;
         w = h;
         h = temp;
+
+        super.pos.x = -y+pivot.x - w/2;
+        super.pos.y = x+pivot.y - h/2;
+
         return;
     }
     public String toString() {
         String ans = "[";
-        Vector2D[] arr = this.getAllPoints();
-        for(int i=0; i<arr.length; i++){
-            Vector2D temp = arr[i];
-            ans += "(" + temp.x + " , " + temp.y + ") , ";
-        }
-        ans = ans.substring(0, ans.length()-3);
-        ans += "]";
+        ans += super.pos.x + " , " + super.pos.y + " , "  + w + " , " + h + "]";
         return ans;
     }
 }
 class RectTest {
     public static void main(String[] args) {
-        Rect rect = new Rect(0.5f, 0.7f, 1.5f, 2.3f);
+        Rect rect = new Rect(0.5f, 0.7f, 1.5f, 2.3f); // x,y는 사각형의 좌측 하단 점.
         System.out.println("Area: " + rect.getArea());
         System.out.println("CoM: " + rect.getCenterOfMass());
         System.out.println("All Points: " + Arrays.toString(rect.getAllPoints()));
 
+        rect.rot90(new Vector2D(0.4f, 0.2f));
+
+        rect.rot90(new Vector2D(0.4f, 0.2f));
+        rect.rot90(new Vector2D(0.4f, 0.2f));
         rect.rot90(new Vector2D(0.4f, 0.2f));
         System.out.println("Rotated rect: " + rect);
         System.out.println("CoM: " + rect.getCenterOfMass());
