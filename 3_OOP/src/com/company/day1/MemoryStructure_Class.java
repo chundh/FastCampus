@@ -21,4 +21,8 @@ public class MemoryStructure_Class { // 클래스 영역
         // int value -> 스택 영역
         char c = '='; // 스택 영역
     }
+
+    static int static_Method(int k){
+        return k;
+    }
 }
