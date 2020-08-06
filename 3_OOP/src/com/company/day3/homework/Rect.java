@@ -101,11 +101,6 @@ class RectTest {
         System.out.println("All Points: " + Arrays.toString(rect.getAllPoints()));
 
         rect.rot90(new Vector2D(0.4f, 0.2f));
-
-        rect.rot90(new Vector2D(0.4f, 0.2f));
-        rect.rot90(new Vector2D(0.4f, 0.2f));
-        rect.rot90(new Vector2D(0.4f, 0.2f));
         System.out.println("Rotated rect: " + rect);
-        System.out.println("CoM: " + rect.getCenterOfMass());
     }
 }
