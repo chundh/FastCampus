@@ -98,7 +98,7 @@ class RectTest {
         Rect rect = new Rect(0.5f, 0.7f, 1.5f, 2.3f); // x,y는 사각형의 좌측 하단 점.
         System.out.println("Area: " + rect.getArea());
         System.out.println("CoM: " + rect.getCenterOfMass());
-        System.out.println("All Points: " + Arrays.toString(rect.getAllPoints()));
+        System.out.println("All Points: " + Arrays.toString(rect.getAllPoints())); //오버라이딩 된 메소드 사용
 
         rect.rot90(new Vector2D(0.4f, 0.2f));
         System.out.println("Rotated rect: " + rect);

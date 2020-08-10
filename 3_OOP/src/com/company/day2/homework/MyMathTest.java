@@ -12,12 +12,23 @@ class MyMath{
     static double PI = 3.1415927;
     static double E = 2.718281;
 
+    static int min(int... params){
+        int min = params[0];
+        for(int i=0; i<params.length; i++){
+            if(params[i]<min)
+                min = params[i];
+        }
+        System.out.println(1);
+        return min;
+    }
+
     static double min(double... params){
         double min = params[0];
         for(int i=0; i<params.length; i++){
             if(params[i]<min)
                 min = params[i];
         }
+        System.out.println(2);
         return min;
     }
 
@@ -51,6 +62,7 @@ public class MyMathTest {
         System.out.println(MyMath.PI);
         System.out.println(MyMath.E);
         System.out.println(MyMath.min(2, 3, -4, 6));
+        System.out.println(MyMath.min(1.0, 2.0, 4.0));
         System.out.println(MyMath.max(7, 0, 6, 16, -4));
         System.out.println(MyMath.abs(5));
         System.out.println(MyMath.abs(-2.3));

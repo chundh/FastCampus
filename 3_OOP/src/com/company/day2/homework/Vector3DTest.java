@@ -36,8 +36,10 @@ class Vector3D{
         return this;
     }
     public Vector3D add(Vector3D a){
-        Vector3D v = new Vector3D(a.x+this.x,a.y+this.y, a.z+this.z);
-        return v;
+        this.x += a.x;
+        this.y += a.y;
+        this.z += a.z;
+        return this;
     }
     public Vector3D sub(float a){
         this.x -= a;
@@ -46,8 +48,10 @@ class Vector3D{
         return this;
     }
     public Vector3D sub(Vector3D a){
-        Vector3D v = new Vector3D(a.x-this.x,a.y-this.y, a.z-this.z);
-        return v;
+        this.x -= a.x;
+        this.y -= a.y;
+        this.z -= a.z;
+        return this;
     }
     public float inner(Vector3D a){
         float num = this.x*a.x + this.y*a.y + this.z*a.z;
