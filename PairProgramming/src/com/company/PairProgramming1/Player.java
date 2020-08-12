@@ -23,6 +23,10 @@ public class Player implements Inputtable {
             System.out.println("좌표를 입력하세요");
             int x = scanner.nextInt();
             int y = scanner.nextInt();
+            if(x>=15 || x<0 || y>=15 || y<0){
+                System.out.println("범위를 초과했습니다. 다시 입력해주세요");
+                continue;
+            }
             if(g.arr[x][y].equals("-")){
                 flag = -1;
                 position = new Position(x, y);
@@ -33,5 +37,13 @@ public class Player implements Inputtable {
 
     public String getName() {
         return name;
+    }
+
+    public int getNumWin() {
+        return numWin;
+    }
+
+    public void setNumWin(int numWin) {
+        this.numWin = numWin;
     }
 }
