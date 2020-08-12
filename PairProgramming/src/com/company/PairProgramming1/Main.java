@@ -31,7 +31,9 @@ public class Main {
     public static void main(String[] args) {
         // Play gomoku here
         Scanner sc = new Scanner(System.in);
+        System.out.println("Plqyer1의 이름을 입력하세요");
         String name1 = sc.next();
+        System.out.println("Plqyer2의 이름을 입력하세요");
         String name2 = sc.next();
         Player p1 = new Player(name1);
         Player p2 = new Player(name2);
