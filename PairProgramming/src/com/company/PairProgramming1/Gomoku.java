@@ -2,21 +2,6 @@ package com.company.PairProgramming1;
 
 import java.util.Scanner;
 
-/**
- * kim
- * chun
- * 1 2
- * 2 4
- * 1 0
- * 2 5
- * 1 1
- * 2 6
- * 1 7
- * 2 7
- * 1 0
- * 2 8
- */
-
 public class Gomoku implements Simulatable, Winnable, Playable, Printable {
     String[][] arr; //
     Player p1;
@@ -38,8 +23,8 @@ public class Gomoku implements Simulatable, Winnable, Playable, Printable {
             System.out.println("백돌 놓음");
         }
         printStatus();
-        threeThree(pos.getX(), pos.getY());
         isFinished();
+        threeThree(pos.getX(), pos.getY());
 
         if(flag==1){
             flag=-1;
@@ -53,9 +38,7 @@ public class Gomoku implements Simulatable, Winnable, Playable, Printable {
 
     @Override
     public void printStatus() { // 오목판의 현재상태를 출력
-//        System.out.println("  0 1 2 3 4 5 6 7 8 9 10 11 12 13 14");
         for(int i=0; i<15; i++){
-//            System.out.printf("%2d", i);
             for(int j=0 ;j<15; j++){
                 System.out.print(arr[i][j]);
             }
@@ -136,7 +119,6 @@ public class Gomoku implements Simulatable, Winnable, Playable, Printable {
             }
         }
         if(f==1){
-            //System.out.println("Case 1 : 승리");
             check_Winner(i, j);
             return;
         }
@@ -153,7 +135,6 @@ public class Gomoku implements Simulatable, Winnable, Playable, Printable {
             z++;
         }
         if(f==1){
-            //System.out.println("Case 2 : 승리");
             check_Winner(i, j);
             return;
         }
@@ -170,7 +151,6 @@ public class Gomoku implements Simulatable, Winnable, Playable, Printable {
             }
         }
         if(f==1){
-            //System.out.println("Case 3 : 승리");
             check_Winner(i, j);
             return;
         }
@@ -188,7 +168,6 @@ public class Gomoku implements Simulatable, Winnable, Playable, Printable {
                 z++;
             }
             if (f == 1) {
-                //System.out.println("Case 4 : 승리");
                 check_Winner(i, j);
                 return;
             }
@@ -215,8 +194,9 @@ public class Gomoku implements Simulatable, Winnable, Playable, Printable {
                     }
                     if(threeCountEach == 3){
                         threeCount++;
-//                        System.out.println(threeCount);
-//                        System.out.println("가로: " + k + " , " + i + ", " + h);
+                    }
+                    else if(threeCountEach==4){
+                        threeCount--;
                     }
                 }
                 threeCountEach = 0;
@@ -230,9 +210,11 @@ public class Gomoku implements Simulatable, Winnable, Playable, Printable {
                     }
                     if(threeCountEach == 3){
                         threeCount++;
-//                        System.out.println(threeCount);
-//                        System.out.println("세로 : " + i + " , " + h);
                     }
+                    else if(threeCountEach==4){
+                        threeCount--;
+                    }
+
                 }
                 threeCountEach = 0;
 
@@ -248,6 +230,9 @@ public class Gomoku implements Simulatable, Winnable, Playable, Printable {
                     }
                     if(threeCountEach == 3){
                         threeCount++;
+                    }
+                    else if(threeCountEach==4){
+                        threeCount--;
                     }
                     z++;
                 }
@@ -266,12 +251,11 @@ public class Gomoku implements Simulatable, Winnable, Playable, Printable {
                     if(threeCountEach == 3){
                         threeCount++;
                     }
+                    else if(threeCountEach==4){
+                        threeCount--;
+                    }
                     z++;
                 }
-                threeCountEach = 0;
-                // 위 대각선
-                // 가로
-                // 아래 대각선
                 if(threeCount>=2){ // 33이다.
                     System.out.println("33이야");
                     if(arr[x][y].equals("X")){
@@ -289,106 +273,5 @@ public class Gomoku implements Simulatable, Winnable, Playable, Printable {
                 }
             }
         }
-//        // 가로
-//        for(int i = Math.max(y - 2, 0); i < y + 2; i++){
-//            if(arr[x][i].equals(arr[x][y])){
-//                threeCountEach++;
-//            } else {
-//                threeCountEach = 0;
-//            }
-//            if(threeCountEach == 3){
-//                threeCount++;
-//                if(threeCount==2) {
-//                    System.out.println("33");
-//                    return;
-//                }
-//                else if(threeCount==1)
-//                    return;
-//                threeThree(x, y, x, i-1, threeCount);
-//                threeThree(x, y, x, i-2, threeCount);
-//            }
-//        }
-//        threeCountEach = 0;
-//
-//        //세로
-//        for(int i = Math.max(x - 2, 0); i < x + 2; i++){
-//            if(arr[i][y].equals(arr[x][y])){
-//                threeCountEach++;
-//            } else {
-//                threeCountEach = 0;
-//            }
-//            if(threeCountEach == 3){
-//                threeCount++;
-//                if(threeCount==2) {
-//                    System.out.println("33");
-//                    return;
-//                }
-//                else if(threeCount==1)
-//                    return;
-//                threeThree(x, y, x, i-1, threeCount);
-//                threeThree(x, y, x, i-2, threeCount);
-//            }
-//        }
-//        threeCountEach = 0;
-//
-//        //대각선 왼쪽 아래에서 오른쪽 위로
-//        int z = Math.max(y - 2, 0);
-//        for(int i = Math.min(x + 2, 14); i > Math.max(x - 2, 0); i--){
-//            if(arr[i][z].equals(arr[x][y])){
-//                threeCountEach++;
-//            } else {
-//                threeCountEach = 0;
-//            }
-//            if(threeCountEach == 3){
-//                threeCount++;
-//                if(threeCount==2) {
-//                    System.out.println("33");
-//                    return;
-//                }
-//                else if(threeCount==1)
-//                    return;
-//                threeThree(x, y, x, i-1, threeCount);
-//                threeThree(x, y, x, i-2, threeCount);
-//            }
-//            z++;
-//        }
-//        threeCountEach = 0;
-//
-//        //왼쪽 위에서 오른쪽 아래로
-//        z = Math.max(y - 2, 0);
-//        for(int i = Math.max(x - 2, 0); i < x + 2; i++){
-//            if(arr[i][z].equals(arr[x][y])){
-//                threeCountEach++;
-//            } else {
-//                threeCountEach = 0;
-//            }
-//            if(threeCountEach == 3){
-//                threeCount++;
-//                if(threeCount==2) {
-//                    System.out.println("33");
-//                    return;
-//                }
-//                else if(threeCount==1)
-//                    return;
-//                threeThree(x, y, x, i-1, threeCount);
-//                threeThree(x, y, x, i-2, threeCount);
-//            }
-//            z++;
-//        }
-//        threeCountEach = 0;
-//        // 위 대각선
-//        // 가로
-//        // 아래 대각선
-//        if(threeCount>=2){ // 33이다.
-//            System.out.println("33이야");
-//            if(arr[x][y].equals("X")){
-//                p2.setNumWin(p2.getNumWin()+1);
-//                System.out.println(p2.getName() + ": " + p2.getNumWin() + "번 이겼다");
-//            }
-//            else {
-//                p1.setNumWin(p1.getNumWin() + 1);
-//                System.out.println(p1.getName() + ": " + p1.getNumWin() + "번 이겼다");
-//            }
-//        }
     }
 }
