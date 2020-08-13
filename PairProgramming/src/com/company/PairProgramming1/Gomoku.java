@@ -324,80 +324,80 @@ public class Gomoku implements Simulatable, Winnable, Playable, Printable {
         reset();
     }
 
-    public void check_Win(int i, int j){
-        int f = 1;
-        int z = j;
-        System.out.println(i + " , " + j + " -------");
-        for(int k=i; k<i+5; k++){ // 아래쪽 체크
-            if(k>=15 || k<0) {
-                f = -1;
-                break;
-            }
-            if(!arr[k][j].equals(arr[i][j])){
-                f = -1;
-                break;
-            }
-        }
-        if(i<11){
-            System.out.println(arr[i+4][j] + " : " + i + " , " + j);
-            if(arr[i+4][j].equals(arr[i][j]))
-                f = -1;
-        }
-        if(f==1){
-            check_Winner(i, j);
-            return;
-        }
-        f=1;
-        for(int k=i; k<i+5; k++){ // 오른쪽 아래 대각선 체크
-            if(k>=15 || k<0 || z>=15 || z<0) {
-                f = -1;
-                break;
-            }
-            if(!arr[k][z].equals(arr[i][j])){
-                f = -1;
-                break;
-            }
-            z++;
-        }
-        if(f==1){
-            check_Winner(i, j);
-            return;
-        }
-        f=1;
-        z = j;
-        for(int k=j; k<j+5; k++){ // 오른쪽 체크
-            if(k>=15 || k<0) {
-                f = -1;
-                break;
-            }
-            if(!arr[i][k].equals(arr[i][j])){
-                f = -1;
-                break;
-            }
-        }
-        if(f==1){
-            check_Winner(i, j);
-            return;
-        }
-        f=1;
-        if(i-5>=0) {
-            for (int k = i; k > i - 5; k--) { // 왼쪽 아래 대각선 체크
-                if (k >= 15 || k < 0 || z >= 15 || z < 0) {
-                    f = -1;
-                    break;
-                }
-                if (!arr[k][z].equals(arr[i][j])) {
-                    f = -1;
-                    break;
-                }
-                z++;
-            }
-            if (f == 1) {
-                check_Winner(i, j);
-                return;
-            }
-        }
-    }
+//    public void check_Win(int i, int j){
+//        int f = 1;
+//        int z = j;
+//        System.out.println(i + " , " + j + " -------");
+//        for(int k=i; k<i+5; k++){ // 아래쪽 체크
+//            if(k>=15 || k<0) {
+//                f = -1;
+//                break;
+//            }
+//            if(!arr[k][j].equals(arr[i][j])){
+//                f = -1;
+//                break;
+//            }
+//        }
+//        if(i<11){
+//            System.out.println(arr[i+4][j] + " : " + i + " , " + j);
+//            if(arr[i+4][j].equals(arr[i][j]))
+//                f = -1;
+//        }
+//        if(f==1){
+//            check_Winner(i, j);
+//            return;
+//        }
+//        f=1;
+//        for(int k=i; k<i+5; k++){ // 오른쪽 아래 대각선 체크
+//            if(k>=15 || k<0 || z>=15 || z<0) {
+//                f = -1;
+//                break;
+//            }
+//            if(!arr[k][z].equals(arr[i][j])){
+//                f = -1;
+//                break;
+//            }
+//            z++;
+//        }
+//        if(f==1){
+//            check_Winner(i, j);
+//            return;
+//        }
+//        f=1;
+//        z = j;
+//        for(int k=j; k<j+5; k++){ // 오른쪽 체크
+//            if(k>=15 || k<0) {
+//                f = -1;
+//                break;
+//            }
+//            if(!arr[i][k].equals(arr[i][j])){
+//                f = -1;
+//                break;
+//            }
+//        }
+//        if(f==1){
+//            check_Winner(i, j);
+//            return;
+//        }
+//        f=1;
+//        if(i-5>=0) {
+//            for (int k = i; k > i - 5; k--) { // 왼쪽 아래 대각선 체크
+//                if (k >= 15 || k < 0 || z >= 15 || z < 0) {
+//                    f = -1;
+//                    break;
+//                }
+//                if (!arr[k][z].equals(arr[i][j])) {
+//                    f = -1;
+//                    break;
+//                }
+//                z++;
+//            }
+//            if (f == 1) {
+//                check_Winner(i, j);
+//                return;
+//            }
+//        }
+//    }
 
     public void threeThree(int x, int y){
         int threeCount = 0;
