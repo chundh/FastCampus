@@ -54,7 +54,7 @@ enum Family{
 public class Enumeration {
     public static void main(String[] args) {
         Job job = Job.CHIEF_EXECUTIONAL_OFFICER; // 클래스 변수와 유사하게 사용
-
+        System.out.println(Family.SON.MOTHER);
         if(job == Job.CHIEF_EXECUTIONAL_OFFICER){
             System.out.println("HI");
         }

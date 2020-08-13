@@ -16,7 +16,7 @@ interface IFooTwo{
         System.out.println("Default Method");
     }
 }
-class FooTwo implements IFooTwo{
+class FooTwo implements IFooTwo, IBar{
     @Override
     public void abstractMethod() {
         System.out.println("Abstract method implement");
@@ -43,6 +43,9 @@ interface IBar{
     static void staticMethod(){
         System.out.println("static method");
     }
+    default void defaultMethod(){
+        System.out.println("IBar default Method");
+    }
 }
 class Bar implements IBar{
 
@@ -50,15 +53,19 @@ class Bar implements IBar{
 public class Interface3 {
     public static void main(String[] args) {
         FooTwo fooTwo = new FooTwo();
-        fooTwo.abstractMethod();
-        fooTwo.defaultMethod();
+//        fooTwo.abstractMethod();
+//        fooTwo.defaultMethod();
+
+        IFooTwo iFooTwo = (IFooTwo) fooTwo;
+        iFooTwo.abstractMethod(); // 자식 클래스의 메소드 호출
+        iFooTwo.defaultMethod(); // 자식 클래스의 메소드 호출
 
         FooThree fooThree = new FooThree();                         
-        fooThree.abstractMethod();
-        fooThree.defaultMethod(); // 부모와 인터페이스에 모두 메소드가 있는 경우 부모 클래스에 있는 메소드를 실행한다.
+//        fooThree.abstractMethod();
+//        fooThree.defaultMethod(); // 부모와 인터페이스에 모두 메소드가 있는 경우 부모 클래스에 있는 메소드를 실행한다.
         // 다중 상속시의 문제를 방지하기 위해, 인터페이스보다 일반 상속이 우선시된다.
 
-        IBar.staticMethod(); // static 메소드는 인터페이스명으로 바로 호출 가능하다.
+        //IBar.staticMethod(); // static 메소드는 인터페이스명으로 바로 호출 가능하다.
         //Bar.staticMethod(); // 구현체인 자식클래스는 클래스 메소드를 호출할 수 없다.
     }
 }

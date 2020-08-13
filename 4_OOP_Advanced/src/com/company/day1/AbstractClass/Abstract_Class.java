@@ -21,6 +21,7 @@ abstract class AbstractFoo{
     
     public abstract void absractMethod(); // 선언만 하고 구현하지 않음
     // Virtual method call과 같다.
+
 }
 
 class Foo extends AbstractFoo{
@@ -45,5 +46,6 @@ public class Abstract_Class {
         afoo.absractMethod();
         // 추상 클래스는 객체 생성은 불가능하지만 구현된 자식 클래스의 객체는 받을 수 있다.
         System.out.println(afoo.x);
+        afoo.method();
     }
 }

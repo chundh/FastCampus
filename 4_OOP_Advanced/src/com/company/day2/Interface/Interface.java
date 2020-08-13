@@ -16,6 +16,7 @@ package com.company.day2.Interface;
 
 // 제어자로 public, default 가능하다.
 interface IFoo{
+    int x = 0;
     public static final int MEMBER_VAR = 10;
     int MEMBER_VAR2 = 20; // public static final
 
@@ -37,4 +38,9 @@ class Foo implements IFoo{
 }
 
 public class Interface {
+    public static void main(String[] args) {
+        Foo f = new Foo();
+        System.out.println(f.x);
+        System.out.println(IFoo.x);
+    }
 }

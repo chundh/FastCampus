@@ -108,6 +108,7 @@ public class Gomoku implements Simulatable, Winnable, Playable, Printable {
     public void check_Win(int i, int j){
         int f = 1;
         int z = j;
+        System.out.println(i + " , " + j + " -------");
         for(int k=i; k<i+5; k++){ // 아래쪽 체크
             if(k>=15 || k<0) {
                 f = -1;
@@ -117,6 +118,11 @@ public class Gomoku implements Simulatable, Winnable, Playable, Printable {
                 f = -1;
                 break;
             }
+        }
+        if(i<11){
+            System.out.println(arr[i+4][j] + " : " + i + " , " + j);
+            if(arr[i+4][j].equals(arr[i][j]))
+                f = -1;
         }
         if(f==1){
             check_Winner(i, j);
