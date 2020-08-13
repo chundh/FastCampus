@@ -7,6 +7,8 @@ public class Gomoku implements Simulatable, Winnable, Playable, Printable {
     Player p1;
     Player p2;
 
+    Position position= null;
+
     int flag=-1;
     public Gomoku(Player p1, Player p2){
         this.p1 = p1;
@@ -22,6 +24,7 @@ public class Gomoku implements Simulatable, Winnable, Playable, Printable {
             this.arr[pos.getX()][pos.getY()] = "O";
             System.out.println("백돌 놓음");
         }
+        position = pos;
         printStatus();
         isFinished();
         threeThree(pos.getX(), pos.getY());
@@ -60,15 +63,231 @@ public class Gomoku implements Simulatable, Winnable, Playable, Printable {
     @Override
     public void isFinished() { // 끝났는지 확인
         int f=1;
-        for(int i = 0; i < 15; i++){
-                for(int j = 0; j < 15; j++){
-                if(arr[i][j].equals("-")){
-                    continue;
-                } else {
-                    check_Win(i, j);
+
+        int x = position.getX(); // 방금 돌을 놓은 위치 x
+        int y = position.getY(); // 방금 돌을 놓은 위치 y
+        //세로 체크
+        int cnt = 1;
+        int check_three = 0;
+        if(arr[x][y].equals("X")){ // 흑돌
+            for(int i=1; i<5; i++){
+                if(x + i >= 15)
+                    break;
+                if(arr[x+i][y].equals("X")){
+                    cnt++;
                 }
+                else
+                    break;
+            }
+            for(int i=1; i<5; i++){
+                if(x - i < 0)
+                    break;
+                if(arr[x-i][y].equals("X")){
+                    cnt++;
+                }
+                else
+                    break;
+            }
+            if(cnt == 3){
+                check_three++;
+            }
+            else if(cnt == 5){ // 오목이 된 경우
+                check_Winner(x, y);
+            }
+        }else{
+            for(int i=1; i<5; i++){
+                if(x + i >= 15)
+                    break;
+                if(arr[x+i][y].equals("O")){
+                    cnt++;
+                }
+                else
+                    break;
+            }
+            for(int i=1; i<5; i++){
+                if(x - i < 0)
+                    break;
+                if(arr[x-i][y].equals("O")){
+                    cnt++;
+                }
+                else
+                    break;
+            }
+            if(cnt == 3){
+                check_three++;
+            }
+            else if(cnt == 5){ // 오목이 된 경우
+                check_Winner(x, y);
             }
         }
+        //가로 체크
+        cnt = 1;
+        if(arr[x][y].equals("X")){ // 흑돌
+            for(int i=1; i<5; i++){
+                if(y+i>=15)
+                    break;
+                if(arr[x][y+i].equals("X")){
+                    cnt++;
+                }
+                else
+                    break;
+            }
+            for(int i=1; i<5; i++){
+                if(y-i<0)
+                    break;
+                if(arr[x][y-i].equals("X")){
+                    cnt++;
+                }
+                else
+                    break;
+            }
+            if(cnt == 3){
+                check_three++;
+            }
+            else if(cnt == 5){ // 오목이 된 경우
+                check_Winner(x, y);
+            }
+        }else{
+            for(int i=1; i<5; i++){
+                if(y+i>=15)
+                    break;
+                if(arr[x][y+i].equals("O")){
+                    cnt++;
+                }
+                else
+                    break;
+            }
+            for(int i=1; i<5; i++){
+                if(y-i<0)
+                    break;
+                if(arr[x][y-i].equals("O")){
+                    cnt++;
+                }
+                else
+                    break;
+            }
+            if(cnt == 3){
+                check_three++;
+            }
+            else if(cnt == 5){ // 오목이 된 경우
+                check_Winner(x, y);
+            }
+        }
+        // 왼쪽 위에서 오른쪽 아래 대각선 방향
+        cnt = 1;
+        if(arr[x][y].equals("X")){ // 흑돌
+            for(int i=1; i<5; i++){ // 아래로 체크
+                if(x + i >= 15 || y + i >= 15)
+                    break;
+                if(arr[x+i][y+i].equals("X")){
+                    cnt++;
+                }
+                else
+                    break;
+            }
+            for(int i=1; i<5; i++){ // 위로 체크
+                if(x - i < 0 || y - i < 0)
+                    break;
+                if(arr[x-i][y-i].equals("X")){
+                    cnt++;
+                }
+                else
+                    break;
+            }
+            if(cnt == 3){
+                check_three++;
+            }
+            else if(cnt == 5){ // 오목이 된 경우
+                check_Winner(x, y);
+            }
+        }else{
+            for(int i=1; i<5; i++){ // 아래로 체크
+                if(x + i >= 15 || y + i >= 15)
+                    break;
+                if(arr[x+i][y+i].equals("O")){
+                    cnt++;
+                }
+                else
+                    break;
+            }
+            for(int i=1; i<5; i++){ // 위로 체크
+                if(x - i < 0 || y - i < 0)
+                    break;
+                if(arr[x-i][y-i].equals("O")){
+                    cnt++;
+                }
+                else
+                    break;
+            }
+            if(cnt == 3){
+                check_three++;
+            }
+            else if(cnt == 5){ // 오목이 된 경우
+                check_Winner(x, y);
+            }
+        }
+        // 오른쪽 위에서 왼쪽 아래 대각선
+        cnt = 1;
+        if(arr[x][y].equals("X")){ // 흑돌
+            for(int i=1; i<5; i++){ // 아래로 체크
+                if(x + i >= 15 || y - i < 0)
+                    break;
+                if(arr[x+i][y-i].equals("X")){
+                    cnt++;
+                }
+                else
+                    break;
+            }
+            for(int i=1; i<5; i++){ // 위로 체크
+                if(x - i < 0 || y + i >= 15)
+                    break;
+                if(arr[x-i][y+i].equals("X")){
+                    cnt++;
+                }
+                else
+                    break;
+            }
+            if(cnt == 3){
+                check_three++;
+            }
+            else if(cnt == 5){ // 오목이 된 경우
+                check_Winner(x, y);
+            }
+        }else{
+            for(int i=1; i<5; i++){ // 아래로 체크
+                if(x + i >= 15 || y - i < 0)
+                    break;
+                if(arr[x+i][y-i].equals("O")){
+                    cnt++;
+                }
+                else
+                    break;
+            }
+            for(int i=1; i<5; i++){ // 위로 체크
+                if(x - i < 0 || y + i >= 15)
+                    break;
+                if(arr[x-i][y+i].equals("O")){
+                    cnt++;
+                }
+                else
+                    break;
+            }
+            if(cnt == 3){
+                check_three++;
+            }
+            else if(cnt == 5){ // 오목이 된 경우
+                check_Winner(x, y);
+            }
+        }
+//        for(int i = 0; i < 15; i++){
+//                for(int j = 0; j < 15; j++){
+//                if(arr[i][j].equals("-")){
+//                    continue;
+//                } else {
+//                    check_Win(i, j);
+//                }
+//            }
+//        }
     }
 
     @Override
