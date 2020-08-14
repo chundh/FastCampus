@@ -411,7 +411,7 @@ public class Gomoku implements Simulatable, Winnable, Playable, Printable {
                     continue;
 
                 // 가로
-                for(int i = Math.max(h - 2, 0); i <= Math.min(h + 2, 14); i++){
+                for(int i = Math.max(h - 2, 0); i <= Math.min(h + 3, 14); i++){
                     if(arr[k][i].equals(arr[k][h])){
                         threeCountEach++;
                     } else {
@@ -427,7 +427,7 @@ public class Gomoku implements Simulatable, Winnable, Playable, Printable {
                 threeCountEach = 0;
 
                 //세로
-                for(int i = Math.max(k - 2, 0); i <= Math.min(k + 2, 14); i++){
+                for(int i = Math.max(k - 2, 0); i <= Math.min(k + 3, 14); i++){
                     if(arr[i][h].equals(arr[k][h])){
                         threeCountEach++;
                     } else {
@@ -445,7 +445,7 @@ public class Gomoku implements Simulatable, Winnable, Playable, Printable {
 
                 //대각선 왼쪽 아래에서 오른쪽 위로
                 int z = Math.max(h - 2, 0);
-                for(int i = Math.min(k + 2, 14); i >= Math.max(k - 2, 0); i--){
+                for(int i = Math.min(k + 2, 14); i >= Math.max(k - 3, 0); i--){
                     if(z>=15 || z<0)
                         break;
                     if(arr[i][z].equals(arr[k][h])){
@@ -465,7 +465,7 @@ public class Gomoku implements Simulatable, Winnable, Playable, Printable {
 
                 //왼쪽 위에서 오른쪽 아래로
                 z = Math.max(h - 2, 0);
-                for(int i = Math.max(k - 2, 0); i <= Math.min(k + 2,14); i++){
+                for(int i = Math.max(k - 2, 0); i <= Math.min(k + 3,14); i++){
                     if(z>=15 || z<0)
                         break;
                     if(arr[i][z].equals(arr[k][h])){
