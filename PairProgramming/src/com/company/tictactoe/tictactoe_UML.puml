@@ -1,0 +1,45 @@
+@startuml
+
+interface Player{
+    int getWinNum();
+    void setWinNum(int num);
+    String getInfo();
+}
+class Main{
+    TicTacToe t;
+    String ex;
+    String name;
+    Scanner sc;
+}
+class HumanPlayer{
+    String info;
+    String name;
+    int win_num;
+    + HumanPlayer(String name);
+    + int getWinNum();
+    + void setWinNum(int num);
+    + String getInfo();
+}
+class AIPlayer{
+    String info;
+    String name;
+    int win_num;
+    + AIPlayer(String name);
+    + int getWinNum();
+    + void setWinNum(int num);
+    + String getInfo();
+}
+class TicTacToe{
+    - static int[][] arr;
+    + Player p1;
+    + Player p2;
+    - int cnt;
+    - int n;
+    + void start();
+    + boolean getResult(int flag);
+}
+
+Player <|-- AIPlayer
+Player <|-- HumanPlayer
+
+@enduml

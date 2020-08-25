@@ -2,6 +2,11 @@ package com.company.tictactoe;
 
 import java.util.Scanner;
 
+/**
+ * AI가 무조건 이기게 하려면?
+ *
+ */
+
 public class TicTacToe {
     static int[][] arr = new int[3][3];
     Player p1;
@@ -46,7 +51,7 @@ public class TicTacToe {
                     } else {
                         arr[x][y] = 1;
                         this.cnt++;
-                        if(this.getResult(p1, 1)){
+                        if(this.getResult(1)){
                             System.out.println("Player1이 승리했습니다.");
                             p1.setWinNum(p1.getWinNum()+1);
                             break;
@@ -60,7 +65,7 @@ public class TicTacToe {
                     } else {
                         arr[x][y] = -1;
                         this.cnt++;
-                        if(this.getResult(p2, -1)){
+                        if(this.getResult(-1)){
                             System.out.println("Player2가 승리했습니다.");
                             p2.setWinNum(p2.getWinNum()+1);
                             break;
@@ -72,7 +77,7 @@ public class TicTacToe {
             }
         }
     }
-    public boolean getResult(Player p, int flag){
+    public boolean getResult(int flag){
         if(this.cnt==(arr.length*arr.length)) {
             System.out.println("결과가 나오지 않으므로 게임을 처음부터 시작합니다.");
             arr = new int[3][3];
