@@ -1,6 +1,11 @@
 package com.company.day4.Homework;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.function.Predicate;
+import java.util.function.UnaryOperator;
 
 /**
  * 열거형 타입과 함수형 프로그래밍을 이용하여 플레이어의 공격력을 계산하는 알고리즘을 구현하시오.
@@ -21,7 +26,7 @@ import java.util.List;
 enum Weapon {
     BARE_HANDS(5), DAGGER(40), LONG_SWORD(100), DRAGON_SLAYER(250);
     // 무기 구현
-    int attack=0;
+    double attack=0;
 
     Weapon(int attack) {
         this.attack = attack;
@@ -29,20 +34,81 @@ enum Weapon {
 }
 
 enum Item {
-    BLACK_POTION, WHITE_POTION, MUSHROOM;
+    BLACK_POTION("%", 10), WHITE_POTION("+", 200), MUSHROOM("+", 20);
     // 소비 아이템 구현
+    String pos;
+    int num;
+
+    Item(String pos, int num) {
+        this.pos = pos;
+        this.num = num;
+    }
 }
 
 class Player {
     Weapon currentWeapon;
     List<Item> items;
-
+    UnaryOperator<Double> setAttack = s->s;
     // TODO: Player에 필요한 메소드 구현
     // 무기 교체, 아이템 사용, 아이템 효과 종료 메소드 구현
+    void changeWeapon(Weapon weapon){
+        this.currentWeapon = weapon;
+        System.out.println("change Weapon : " + weapon);
+        double ans = setAttack.apply(this.currentWeapon.attack);
+        System.out.println("현재 공격력 : " + ans);
+        this.items.sort((o1, o2) -> o1.name().charAt(1) < o2.name().charAt(1) ? 1 : -1);
+        for(Item i : this.items){
+            System.out.print("적용 물약 : " + i.name() + " -> Attack : ");
+            if(i.pos.equals("%")){
+                ans += ans*((double)i.num/100);
+            }else{
+                ans += i.num;
+            }
+            System.out.println(ans);
+        }
+        this.currentWeapon.attack = ans;
+    }
+
+    void useItem(Item item){
+        this.items.add(item);
+        double ans = this.currentWeapon.attack;
+        System.out.print("적용 물약 : " + item.name() + " -> Attack : ");
+        if(item.pos.equals("%")){
+            ans += ans*((double)item.num/100);
+        }else{
+            ans += item.num;
+        }
+        System.out.println(ans);
+        this.currentWeapon.attack = setAttack.apply(ans);
+    }
+
+    void removeItem(Item item){
+        this.items.remove(item);
+        double ans = setAttack.apply(this.currentWeapon.attack);
+        System.out.print("효과 제거 물약 : " + item.name() + " -> Attack : ");
+        if(item.pos.equals("%")){
+            ans -= ans*((double)item.num/100);
+        }else{
+            ans -= item.num;
+        }
+        this.currentWeapon.attack = setAttack.apply(ans);
+        System.out.println("현재 공격력 : " + ans);
+    }
 }
 
 public class DamageCalculation {
     public static void main(String[] args) {
         // 무기 및 아이템 장착/사용 시나리오 및 플레이어 공격력 출력
+        Player p = new Player();
+        p.items = new ArrayList<>();
+        UnaryOperator<Weapon> weapon = s -> s;
+        UnaryOperator<Item> item = i -> i;
+        p.changeWeapon(weapon.apply(Weapon.BARE_HANDS));
+        p.useItem(item.apply(Item.BLACK_POTION));
+        p.useItem(item.apply(Item.WHITE_POTION));
+        p.useItem(item.apply(Item.MUSHROOM));
+        p.useItem(item.apply(Item.MUSHROOM));
+        p.removeItem(item.apply(Item.MUSHROOM));
+        p.changeWeapon(weapon.apply(Weapon.DRAGON_SLAYER));
     }
 }
