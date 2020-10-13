@@ -1,9 +1,6 @@
 package com.company.day4.Homework;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.function.Predicate;
 import java.util.function.UnaryOperator;
 

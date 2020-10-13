@@ -43,6 +43,7 @@ public class streamapi {
 
         // 실제 사용 방법
         Stream<String> stringStream = Stream.of("Java", "Is", "Fun", "Isn't", "It", "?");
+        stringStream.peek(System.out::println);
         // 중간처리 메소드 - 스트림을 반환 (stringStream.distinct()가 스트림을 반환한다.)
         // 필터링 메소드
         // distinct() : 스트림에 같은 요소가 있는 경우 하나만 남기고 다 삭제한다.

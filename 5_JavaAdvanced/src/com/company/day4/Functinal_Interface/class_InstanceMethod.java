@@ -21,6 +21,8 @@ public class class_InstanceMethod {
 
         // 클래스::클래스메소드
         Function<String, Integer> func = Integer::parseInt;
+        Function<String, Integer> func1 = (x)->Integer.valueOf(x);
+
 
         // 인스턴스::인스턴스메소드
         String s = "aaa";
