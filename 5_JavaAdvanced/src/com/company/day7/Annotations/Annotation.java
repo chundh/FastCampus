@@ -52,6 +52,7 @@ import static java.lang.annotation.ElementType.*;
 }
 
 class AnnotationsUsage{
+
     @MyAnnotation("game")
     String game = "TicTactoe";
     // value는 String[]이므로 value에는 배열로 넣어줘야하지만 길이가 1이면 String만 넣어도 됨
