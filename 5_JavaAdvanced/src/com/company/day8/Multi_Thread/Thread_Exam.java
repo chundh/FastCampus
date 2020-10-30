@@ -1,7 +1,5 @@
 package com.company.day8.Multi_Thread;
 
-import java.util.TreeMap;
-
 public class Thread_Exam {
     public static void main(String[] args) {
         Thread p1 = new Thread(() -> {
