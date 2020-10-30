@@ -30,7 +30,8 @@ public class ThreadPool {
         /* 2. newfixedThreadPool
             - 초기 스레드 nThreads개
             - 코어스레드 nThreads개
-            - 작업하지 않는 스레드도 제거하지 않고 살려둔다. (한번 스레드 수를 증가시키면 줄어들지 않는다.)
+            - 작업하지 않는 스레드도 제거하지 않고 살려둔다. (한번 스레드 수를 증가시키면 줄어들지 않는다.)??
+            - 동작에 실패하는 스레드의 경우 그 자리를 대기중이던 스레드가 대체한다.
          */
         ExecutorService pool2 = Executors.newFixedThreadPool(10);
 
@@ -77,9 +78,11 @@ public class ThreadPool {
             pool1.submit(new Work());
 //            pool1.submit(new CallableWork());
         }
+        pool2.shutdown();
         // 스레드 풀은 자동 종료가 안되기 때문에, 직접 스레드들을 종료해 주어야 한다.
         pool1.shutdown(); // Thread.join()과 마찬가지로 작업이 끝나기를 기다렸다가 종료한다. nonblock이다.
-        future.cancel(true);// 실행중인 Callable 객체를 취소할 수 있다.
+        future.cancel(true);
+        // 실행중인 Callable 객체를 취소할 수 있다.
         // 실행중인 객체에 Interrupt를 발생시킨다.
         // false인 경우 Interrupt를 발생시키지 않지만 해당 객체의 get을 실행할 수 없게 한다.(CancellationException발생)
 
